@@ -12,14 +12,14 @@ class _HomeScreenState extends State<HomeScreen> {
   static const twentyFiveMinutes = 1500;
   int totalSeconds = twentyFiveMinutes;
   bool isRunning = false;
-  int totalPomodors = 0;
+  int totalPomodoros = 0;
   late Timer timer;
 
   void onThick(Timer timer) {
     if (totalSeconds == 0) {
       setState(() {
         isRunning = false;
-        totalPomodors++;
+        totalPomodoros++;
         totalSeconds = twentyFiveMinutes;
       });
     } else {
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          '$totalPomodors',
+                          '$totalPomodoros',
                           style: TextStyle(
                             fontSize: 60,
                             fontWeight: FontWeight.w600,
