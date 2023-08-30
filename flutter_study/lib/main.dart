@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 void main() {
-  var t1 = T1();
-  t1.setInput(['test1', 'test2']);
-  print(t1.getOutput(Duration.zero, Duration.zero));
+  const jsonData = '{"name": "Pizza da Mario", "cuisine": "Italian"}';
+  var t0 = T0();
+  t0.setInput([jsonData]);
+  print(t0.getOutput(Duration.zero, Duration.zero));
 }
 
 abstract class ITextTest {
@@ -10,7 +13,7 @@ abstract class ITextTest {
   void setInput(List<String> args);
 }
 
-class T1 implements ITextTest {
+class T0 implements ITextTest {
   List<String> args = [];
 
   @override
@@ -18,10 +21,15 @@ class T1 implements ITextTest {
 
   @override
   List<String> getOutput(Duration elapsed, Duration delta) {
+    Map<String, dynamic> parsed = jsonDecode(args[0]);
+    var name = parsed['name'];
+    var cuisine = parsed['cuisine'];
+    var message = 'Welcome to $cuisine restaurant $name !';
+
     return [
       'Elapsed: ${elapsed.inMilliseconds}ms',
       'Delta: ${delta.inMilliseconds}ms',
-      ...args,
+      message,
     ];
   }
 
