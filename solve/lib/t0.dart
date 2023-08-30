@@ -1,6 +1,7 @@
 library solve_jh;
 
 import 'package:lib/study_lib.dart';
+export 'package:solve_jh/t0.dart' show T0;
 
 class T0 extends ITextTest {
   List<String> args = [];
