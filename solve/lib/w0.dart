@@ -3,8 +3,6 @@ library solve_jh;
 import 'package:flutter/material.dart';
 import 'package:lib/study_lib.dart';
 
-export 'package:solve_jh/w0.dart' show W0;
-
 class W0 implements IWidgetTest {
   @override
   String get authorName => 'Jihoon';
