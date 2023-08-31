@@ -3,45 +3,55 @@ library solve_jh;
 import 'package:lib/study_lib.dart';
 
 class T1 extends ITextTest {
+  final List<int> nx = [5, 0, -5, 0];
+  final List<int> ny = [0, -5, 0, 5];
   List<String> args = [];
-  var x = 18;
-  var y = 12;
-  var nx = [5, 0, -5, 0];
-  var ny = [0, -5, 0, 5];
-  var idx = 0;
+  List<String> lastOutput = [];
+  DateTime lastDelta = DateTime.now();
+  int x = 18;
+  int y = 12;
+  int idx = 0;
 
   @override
   String get authorName => 'Jihoon';
 
   @override
   List<String> getOutput(Duration elapsed, Duration delta) {
+    List<String> output = <String>[];
+
     try {
-      final output = <String>[];
-      var coordinates = List.filled(20, List.filled(40, 0));
-      var animationBuffer = StringBuffer();
-      for (var i = 0; i < coordinates.length; i++) {
-        for (var j = 0; j < coordinates[i].length; j++) {
-          [y, y + 1, y - 1].contains(i) && [x, x + 1, x - 1].contains(j)
-              ? animationBuffer.write('♥')
-              : animationBuffer.write('♡');
+      final nowDelta = DateTime.now();
+      final diff = nowDelta.difference(lastDelta).inMilliseconds;
+
+      if (int.parse(diff.toString()) > 300 || idx < 1) {
+        lastDelta = nowDelta;
+        final coordinates = List.filled(20, List.filled(40, 0));
+        final animationBuffer = StringBuffer();
+        for (var i = 0; i < coordinates.length; i++) {
+          for (var j = 0; j < coordinates[i].length; j++) {
+            [y, y + 1, y - 1].contains(i) && [x, x + 1, x - 1].contains(j)
+                ? animationBuffer.write('♥')
+                : animationBuffer.write('♡');
+          }
+          animationBuffer.write('\n');
         }
-        animationBuffer.write('\n');
-      }
-      x += nx[idx % 4];
-      y += ny[idx % 4];
-      idx++;
+        x += nx[idx % 4];
+        y += ny[idx % 4];
+        idx++;
 
-      var stringBuffer = StringBuffer();
-      for (var i = 1; i <= 21; i++) {
-        idx % i != 0
-            ? stringBuffer.write('♥' * i)
-            : stringBuffer.write('♡' * i);
-        stringBuffer.write('\n');
-      }
+        final stringBuffer = StringBuffer();
+        for (var i = 1; i <= 21; i++) {
+          stringBuffer.write('♥' * i);
+          stringBuffer.write('\n');
+        }
 
-      output.add(stringBuffer.toString());
-      output.add(animationBuffer.toString());
-      return output;
+        output.add(stringBuffer.toString());
+        output.add(animationBuffer.toString());
+        lastOutput = output;
+
+        return output;
+      }
+      return lastOutput;
     } catch (e) {
       return [e.toString()];
     }
