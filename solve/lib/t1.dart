@@ -1,11 +1,14 @@
 library solve_jh;
 
-import 'package:flutter/material.dart';
 import 'package:lib/study_lib.dart';
-import 'dart:async';
 
 class T1 extends ITextTest {
   List<String> args = [];
+  var x = 18;
+  var y = 12;
+  var nx = [5, 0, -5, 0];
+  var ny = [0, -5, 0, 5];
+  var idx = 0;
 
   @override
   String get authorName => 'Jihoon';
@@ -15,25 +18,27 @@ class T1 extends ITextTest {
     try {
       final output = <String>[];
       var coordinates = List.filled(20, List.filled(40, 0));
-      var nx = [1, -1, 0, 0];
-      var ny = [0, 0, 1, -1];
-
-      Timer.periodic(const Duration(seconds: 1), (Timer t) {
-        for (var y = 0; y < coordinates.length; y++) {
-          for (var x = 0; x < coordinates[y].length; x++) {
-            print(coordinates[y][x]);
-            print('\n');
-          }
+      var animationBuffer = StringBuffer();
+      for (var i = 0; i < coordinates.length; i++) {
+        for (var j = 0; j < coordinates[i].length; j++) {
+          [y, y + 1, y - 1].contains(i) && [x, x + 1, x - 1].contains(j)
+              ? animationBuffer.write('♥')
+              : animationBuffer.write('♡');
         }
-      });
+        animationBuffer.write('\n');
+      }
+      x += nx[idx % 4];
+      y += ny[idx % 4];
+      idx++;
 
-      var buffer = StringBuffer();
+      var stringBuffer = StringBuffer();
       for (var i = 1; i <= 20; i++) {
-        buffer.write('♥' * i);
-        buffer.write('\n');
+        stringBuffer.write('♥' * i);
+        stringBuffer.write('\n');
       }
 
-      output.add(buffer.toString());
+      output.add(stringBuffer.toString());
+      output.add(animationBuffer.toString());
       return output;
     } catch (e) {
       return [e.toString()];
