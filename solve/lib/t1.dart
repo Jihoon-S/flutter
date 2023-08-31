@@ -32,8 +32,10 @@ class T1 extends ITextTest {
       idx++;
 
       var stringBuffer = StringBuffer();
-      for (var i = 1; i <= 20; i++) {
-        stringBuffer.write('♥' * i);
+      for (var i = 1; i <= 21; i++) {
+        idx % i != 0
+            ? stringBuffer.write('♥' * i)
+            : stringBuffer.write('♡' * i);
         stringBuffer.write('\n');
       }
 
