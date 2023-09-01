@@ -23,7 +23,7 @@ class T1 extends ITextTest {
       final nowDelta = DateTime.now();
       final diff = nowDelta.difference(lastDelta).inMilliseconds;
 
-      if (int.parse(diff.toString()) > 300 || idx < 1) {
+      if (diff > 300 || idx < 1) {
         lastDelta = nowDelta;
         final coordinates = List.filled(20, List.filled(40, 0));
         final animationBuffer = StringBuffer();
