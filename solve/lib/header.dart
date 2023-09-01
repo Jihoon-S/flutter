@@ -5,3 +5,4 @@ export 'package:solve_jh/t1.dart' show T1;
 export 'package:solve_jh/t2.dart' show T2;
 
 export 'package:solve_jh/w0.dart' show W0;
+export 'package:solve_jh/w1.dart' show W1;
