@@ -2,6 +2,6 @@ import 'package:lib/study_lib.dart';
 import 'package:solve_jh/header.dart';
 
 void main() {
-  runTextTest(T4());
-  // runWidgetTest(W2());
+  // runTextTest(T4());
+  runWidgetTest(W3());
 }
