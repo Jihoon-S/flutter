@@ -57,54 +57,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: 100,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.blue[200],
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.add_box_outlined,
-                size: 80,
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '댕댕이',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue[700],
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   height: 3,
-                    // ),
-                    const Text(
-                      '댕댕이도 귀여워',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(
-                Icons.arrow_forward,
-                size: 30,
-              ),
-            ],
-          ),
+    return const Center(
+      child: SizedBox(
+        child: Column(
+          children: [
+            Text('test'),
+            Text('test'),
+          ],
         ),
       ),
     );
