@@ -6,7 +6,7 @@ import 'package:lib/study_lib.dart';
 
 class T3 extends ITextTest {
   List<String> args = [];
-  bool isRight = true;
+  bool isDown = true;
   double x = 0;
   double y = 0;
   double degree = 0.0;
@@ -35,12 +35,12 @@ class T3 extends ITextTest {
       degree += 360 * delta.inMilliseconds / 1500;
       y = 10 + (10 * sin(degree * (pi / 180.0)));
 
-      if (isRight) {
+      if (isDown) {
         x += 40 * delta.inMilliseconds / 1500;
-        if (x > 38) isRight = !isRight;
+        if (x > 38) isDown = !isDown;
       } else {
         x -= 40 * delta.inMilliseconds / 1500;
-        if (x < 1) isRight = !isRight;
+        if (x < 1) isDown = !isDown;
       }
 
       return output;
