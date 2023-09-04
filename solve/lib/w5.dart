@@ -3,7 +3,24 @@ library solve_jh;
 import 'package:flutter/material.dart';
 import 'package:lib/study_lib.dart';
 
-class MyLists {
+class W5 extends IWidgetTest {
+  @override
+  String get authorName => 'jh';
+
+  @override
+  StatefulWidget createWidget(BuildContext context, Key key) {
+    return W5Widget(key: key);
+  }
+}
+
+class W5Widget extends StatefulWidget {
+  const W5Widget({super.key});
+
+  @override
+  State<W5Widget> createState() => _W5WidgetState();
+}
+
+class _W5WidgetState extends State<W5Widget> {
   final List<Color> colorList = [
     Colors.red,
     Colors.orange,
@@ -24,26 +41,7 @@ class MyLists {
     '토',
     '일',
   ];
-}
 
-class W5 extends IWidgetTest {
-  @override
-  String get authorName => 'jh';
-
-  @override
-  StatefulWidget createWidget(BuildContext context, Key key) {
-    return W5Widget(key: key);
-  }
-}
-
-class W5Widget extends StatefulWidget {
-  const W5Widget({super.key});
-
-  @override
-  State<W5Widget> createState() => _W5WidgetState();
-}
-
-class _W5WidgetState extends State<W5Widget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -54,30 +52,43 @@ class _W5WidgetState extends State<W5Widget> {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: InkWell(
+            child: GestureDetector(
               onTap: () {
-                Navigator.of(context).push(detailRoute(index));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      MyLists().colorList[index],
-                      MyLists().colorList[index + 1].withOpacity(0.7),
-                    ],
-                    stops: const [0.3, 1],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // fullscreenDialog: true,
+                    builder: (context) => DetailW5Widget(
+                      index: index,
+                      colorList: colorList,
+                      daysList: daysList,
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    MyLists().daysList[index],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
+                );
+              },
+              child: Hero(
+                tag: index,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        colorList[index],
+                        colorList[index + 1].withOpacity(0.7),
+                      ],
+                      stops: const [0.3, 1],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: Text(
+                      daysList[index],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
@@ -90,29 +101,17 @@ class _W5WidgetState extends State<W5Widget> {
   }
 }
 
-Route detailRoute(index) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        DetailW5Widget(index: index),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
-
 class DetailW5Widget extends StatelessWidget {
   final int index;
+  final List<Color> colorList;
+  final List<String> daysList;
 
-  const DetailW5Widget({super.key, required this.index});
+  const DetailW5Widget({
+    super.key,
+    required this.index,
+    required this.colorList,
+    required this.daysList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,32 +125,35 @@ class DetailW5Widget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: MyLists().colorList[index],
-                    borderRadius: BorderRadius.circular(999),
-                    gradient: LinearGradient(
-                      colors: [
-                        MyLists().colorList[index],
-                        MyLists().colorList[index + 1].withOpacity(0.7),
-                      ],
-                      stops: const [0.3, 1],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      MyLists().daysList[index],
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300,
+              Hero(
+                tag: index,
+                child: Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: colorList[index],
+                      borderRadius: BorderRadius.circular(999),
+                      gradient: LinearGradient(
+                        colors: [
+                          colorList[index],
+                          colorList[index + 1].withOpacity(0.7),
+                        ],
+                        stops: const [0.3, 1],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
                     ),
-                  )),
+                    child: Center(
+                      child: Text(
+                        daysList[index],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    )),
+              ),
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: const Text(
