@@ -12,3 +12,4 @@ export 'package:solve_jh/w2.dart' show W2;
 export 'package:solve_jh/w3.dart' show W3;
 export 'package:solve_jh/w4.dart' show W4;
 export 'package:solve_jh/w5.dart' show W5;
+export 'package:solve_jh/w6.dart' show W6;

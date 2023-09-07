@@ -14,6 +14,7 @@ dependencies:
   lib:
     git:
       url: https://github.com/monoforest/flutter-study-lib.git
+  matrix_gesture_detector: ^0.2.0-nullsafety.1
 
 dev_dependencies:
   flutter_test:
