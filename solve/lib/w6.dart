@@ -5,13 +5,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:lib/study_lib.dart';
 
-class Marker {
-  double x;
-  double y;
-
-  Marker(this.x, this.y);
-}
-
 class W6 extends IWidgetTest {
   @override
   String get authorName => 'jh';
@@ -33,7 +26,7 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
   bool isRotate = false;
   double x = 0.0;
   double z = 0.0;
-  List<Marker> markers = [];
+  List<Offset> markers = [];
   final imageWidth = 300.0;
   final imageHeight = 300.0;
 
@@ -99,7 +92,7 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
                   final markerY = details.localPosition.dy - 36.0;
 
                   setState(() {
-                    markers.add(Marker(markerX, markerY));
+                    markers.add(Offset(markerX, markerY));
                   });
                 },
                 child: Transform(
@@ -133,8 +126,8 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
               ),
               for (var marker in markers)
                 Positioned(
-                  left: marker.x,
-                  top: marker.y,
+                  left: marker.dx,
+                  top: marker.dy,
                   child: const Icon(
                     Icons.location_pin,
                     size: 36,
