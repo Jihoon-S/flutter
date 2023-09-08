@@ -34,6 +34,8 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
   double x = 0.0;
   double z = 0.0;
   List<Marker> markers = [];
+  final imageWidth = 300.0;
+  final imageHeight = 300.0;
 
   late AnimationController _controllerX;
   late AnimationController _controllerZ;
@@ -44,7 +46,7 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 500),
       reverseDuration: const Duration(milliseconds: 500),
       vsync: this,
-      upperBound: pi * 0.3,
+      upperBound: pi * 0.32,
     );
     _controllerX.addListener(() {
       setState(() {
@@ -107,6 +109,8 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
                     ..rotateZ(z),
                   alignment: Alignment.center,
                   child: Container(
+                    width: 300,
+                    height: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
@@ -121,6 +125,7 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         'https://cdn.aitimes.kr/news/photo/202303/27617_41603_044.jpg',
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -173,28 +178,35 @@ class _W6WidgetState extends State<W6Widget> with TickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              if (markers.isNotEmpty)
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      if (isRotate) {
+                        _controllerX.reverse();
+                        _controllerZ.reverse();
+                      } else {
+                        _controllerX.forward();
+                        _controllerZ.repeat();
+                      }
+
+                      isRotate = !isRotate;
+                    });
+                  },
+                  child: Text(isRotate ? 'end' : 'Start'),
+                ),
               TextButton(
                 onPressed: () {
                   setState(() {
+                    _controllerX.reverse();
+                    _controllerZ.reverse();
+                    x = 0.0;
+                    z = 0.0;
                     markers = [];
+                    isRotate = false;
                   });
                 },
                 child: const Text('Reset'),
-              ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    if (!isRotate) {
-                      _controllerX.forward();
-                      _controllerZ.repeat();
-                    } else {
-                      _controllerX.reverse();
-                      _controllerZ.reverse();
-                    }
-                    isRotate = !isRotate;
-                  });
-                },
-                child: Text(isRotate ? 'End' : 'Start'),
               ),
             ],
           )
