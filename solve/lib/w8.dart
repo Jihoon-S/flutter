@@ -60,7 +60,13 @@ class _Box1State extends State<Box1> {
       height: 150,
       color: Colors.orange,
       child: Center(
-        child: Text('$val'),
+        child: Text(
+          '$val',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ),
+        ),
       ),
     );
   }
@@ -83,7 +89,13 @@ class _Box2State extends State<Box2> {
       height: 150,
       color: Colors.red,
       child: Center(
-        child: Text('$val'),
+        child: Text(
+          '$val',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ),
+        ),
       ),
     );
   }
@@ -106,7 +118,13 @@ class _Box3State extends State<Box3> {
       height: 150,
       color: Colors.purple,
       child: Center(
-        child: Text('$val'),
+        child: Text(
+          '$val',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ),
+        ),
       ),
     );
   }
