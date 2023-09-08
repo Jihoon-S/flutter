@@ -37,14 +37,13 @@ class _W7WidgetState extends State<W7Widget> implements ITickerState {
     return ShaderMask(
       shaderCallback: (bounds) {
         return RadialGradient(
-          // center: Alignment.topLeft,
-          radius: 1.0,
+          radius: 0.35,
           colors: const [
             Colors.red,
             Colors.yellow,
           ],
           stops: [0.0, stop],
-          tileMode: TileMode.decal,
+          tileMode: TileMode.mirror,
         ).createShader(bounds);
       },
       child: const Column(
