@@ -24,6 +24,8 @@ class _W8WidgetState extends State<W8Widget> {
   final box3Key = GlobalKey<_Box3State>();
   final ValueNotifier<int> noti = ValueNotifier<int>(6);
 
+  void test() {}
+
   @override
   Widget build(BuildContext context) {
     return Row(
