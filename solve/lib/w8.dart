@@ -22,24 +22,51 @@ class _W8WidgetState extends State<W8Widget> {
   final box1Key = GlobalKey<_Box1State>();
   final box2Key = GlobalKey<_Box2State>();
   final box3Key = GlobalKey<_Box3State>();
-  final ValueNotifier<int> noti = ValueNotifier<int>(6);
 
-  void test() {}
+  void onTap() {
+    final values = [
+      box1Key.currentState!.noti.value,
+      box2Key.currentState!.noti.value,
+      box3Key.currentState!.noti.value,
+    ];
+    values.sort();
+
+    final targetValue = box1Key.currentState!.noti.value +
+        box2Key.currentState!.noti.value +
+        box3Key.currentState!.noti.value;
+
+    if (box1Key.currentState!.noti.value == values[0]) {
+      box1Key.currentState!.noti.value = targetValue;
+    } else if (box2Key.currentState!.noti.value == values[0]) {
+      box2Key.currentState!.noti.value = targetValue;
+    } else {
+      box3Key.currentState!.noti.value = targetValue;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Box1(key: box1Key),
+        GestureDetector(
+          onTap: onTap,
+          child: Box1(key: box1Key),
+        ),
         const SizedBox(
           width: 20,
         ),
-        Box2(key: box2Key),
+        GestureDetector(
+          onTap: onTap,
+          child: Box2(key: box2Key),
+        ),
         const SizedBox(
           width: 20,
         ),
-        Box3(key: box3Key),
+        GestureDetector(
+          onTap: onTap,
+          child: Box3(key: box3Key),
+        ),
       ],
     );
   }
@@ -53,7 +80,7 @@ class Box1 extends StatefulWidget {
 }
 
 class _Box1State extends State<Box1> {
-  int val = 1;
+  final ValueNotifier<int> noti = ValueNotifier<int>(1);
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +89,17 @@ class _Box1State extends State<Box1> {
       height: 150,
       color: Colors.orange,
       child: Center(
-        child: Text(
-          '$val',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ),
+        child: ValueListenableBuilder(
+          valueListenable: noti,
+          builder: ((context, value, child) {
+            return Text(
+              '$value',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            );
+          }),
         ),
       ),
     );
@@ -82,7 +114,7 @@ class Box2 extends StatefulWidget {
 }
 
 class _Box2State extends State<Box2> {
-  int val = 2;
+  final ValueNotifier<int> noti = ValueNotifier<int>(2);
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +123,17 @@ class _Box2State extends State<Box2> {
       height: 150,
       color: Colors.red,
       child: Center(
-        child: Text(
-          '$val',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ),
+        child: ValueListenableBuilder(
+          valueListenable: noti,
+          builder: ((context, value, child) {
+            return Text(
+              '$value',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            );
+          }),
         ),
       ),
     );
@@ -111,7 +148,7 @@ class Box3 extends StatefulWidget {
 }
 
 class _Box3State extends State<Box3> {
-  int val = 3;
+  final ValueNotifier<int> noti = ValueNotifier<int>(3);
 
   @override
   Widget build(BuildContext context) {
@@ -120,12 +157,17 @@ class _Box3State extends State<Box3> {
       height: 150,
       color: Colors.purple,
       child: Center(
-        child: Text(
-          '$val',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ),
+        child: ValueListenableBuilder(
+          valueListenable: noti,
+          builder: ((context, value, child) {
+            return Text(
+              '$value',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            );
+          }),
         ),
       ),
     );
