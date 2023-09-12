@@ -15,3 +15,4 @@ export 'package:solve_jh/w5.dart' show W5;
 export 'package:solve_jh/w6.dart' show W6;
 export 'package:solve_jh/w7.dart' show W7;
 export 'package:solve_jh/w8.dart' show W8;
+export 'package:solve_jh/w9.dart' show W9;
