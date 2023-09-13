@@ -5,6 +5,7 @@ export 'package:solve_jh/t1.dart' show T1;
 export 'package:solve_jh/t2.dart' show T2;
 export 'package:solve_jh/t3.dart' show T3;
 export 'package:solve_jh/t4.dart' show T4;
+export 'package:solve_jh/t5.dart' show T5;
 
 export 'package:solve_jh/w0.dart' show W0;
 export 'package:solve_jh/w1.dart' show W1;
